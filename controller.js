@@ -1,14 +1,28 @@
-var HID = require('node-hid')
+var HID = require('node-hid');
 
-function Controller(vid, pid) {
-    this.device = new HID.HID(vid, pid);
-    this.inputBuffer = null;
+var device = null;
+var inputBuffer = null;
 
-    this.device.on("data", function(data) {
-        this.inputBuffer = data;
+function createController(vid, pid) {
+    device = new HID.HID(vid, pid);
+
+    device.on("data", function(data) {
+        inputBuffer = parseInput(data);
     })
 }
 
-Controller.prototype.readInputs = function() {
-    return this.inputBuffer;
+function readInputs() {
+    console.log("reading inputs")
+    console.log(inputBuffer)
+    return inputBuffer;
+}
+
+function parseInput(input) {
+    //TODO: Parse dualsense input
+    return input;
+}
+
+module.exports = {
+    createController,
+    readInputs
 }

@@ -1,15 +1,10 @@
-var HID = require('node-hid')
+var controller = require('./controller');
 
 console.log("render started")
+controller.createController(1356, 3302);
 
-
-async function createController() {
-  var controller = await HID.HIDAsync.open(1356, 3302);
-
-  controller.on('data', function(data) {
-    console.log(data);
-    document.getElementById("deviceData").textContent = data
-  })
+function updateInputs() {
+  controller.readInputs()
 }
 
-document.getElementById('starter').addEventListener('click', createController)
+document.getElementById('starter').addEventListener('click', updateInputs)

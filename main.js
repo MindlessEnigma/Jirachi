@@ -7,9 +7,9 @@
 
 const { app, BrowserWindow } = require('electron')
 
+var HID = require('node-hid')
 
-
-//console.log("HID devices:",HID.devices());
+console.log("HID devices:",HID.devices());
 
 
 
